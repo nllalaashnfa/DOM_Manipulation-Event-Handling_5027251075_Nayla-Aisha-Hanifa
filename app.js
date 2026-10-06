@@ -17,39 +17,12 @@ const inputDeadline = document.getElementById('input-deadline');
 const pesanError = document.getElementById('pesan-error');
 
 function render() {
-    listTugas.innerHTML = ''; 
-
-tugas.forEach(item => {
-const li = document.createElement('li');
-        li.dataset.id = item.id;
-        const checkbox = document.createElement('input');
-        checkbox.type = 'checkbox';
-        checkbox.className = 'cek-selesai';
-        checkbox.checked = item.selesai;
-        const divTeks = document.createElement('div');
-        divTeks.className = 'teks';
-        const judul = document.createElement('strong');
-        judul.textContent = item.judul;
-        const meta = document.createElement('small');
-        meta.textContent = `${item.matkul} - deadline ${item.deadline}`; 
-        divTeks.appendChild(judul);
-        divTeks.appendChild(meta);
-        const btnHapus = document.createElement('button');
-        btnHapus.className = 'btn-hapus';
-        btnHapus.textContent = '✕';
-        li.appendChild(checkbox);
-        li.appendChild(divTeks);
-        li.appendChild(btnHapus);
-        listTugas.appendChild(li);
-    });
-}
-
-function render() {
     let dataDitampilkan = tugas.filter(item => {
         if (filterAktif === 'aktif') return !item.selesai;
         if (filterAktif === 'selesai') return item.selesai;
         return true;
     });
+    
     dataDitampilkan.sort((a, b) => new Date(a.deadline) - new Date(b.deadline));
 
     listTugas.innerHTML = '';
@@ -118,6 +91,7 @@ form.addEventListener('submit', (e) => {
         selesai: false
     });
 
+    simpanData(); 
     render();
     form.reset();
 });
@@ -130,10 +104,12 @@ listTugas.addEventListener('click', (e) => {
     if (e.target.classList.contains('cek-selesai')) {
         const item = tugas.find(t => t.id === id);
         if (item) item.selesai = !item.selesai;
+        simpanData(); 
         render();
     } 
     else if (e.target.classList.contains('btn-hapus')) {
         tugas = tugas.filter(t => t.id !== id);
+        simpanData(); 
         render();
     }
 });
@@ -146,3 +122,6 @@ tombolFilters.forEach(btn => {
         render();
     });
 });
+
+
+render();
