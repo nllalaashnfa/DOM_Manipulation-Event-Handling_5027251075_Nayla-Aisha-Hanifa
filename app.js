@@ -67,3 +67,19 @@ form.addEventListener('submit', (e) => {
     render();
     form.reset();
 });
+
+listTugas.addEventListener('click', (e) => {
+    const li = e.target.closest('li');
+    if (!li) return;
+    const id = li.dataset.id;
+
+    if (e.target.classList.contains('cek-selesai')) {
+        const item = tugas.find(t => t.id === id);
+        if (item) item.selesai = !item.selesai;
+        render();
+    } 
+    else if (e.target.classList.contains('btn-hapus')) {
+        tugas = tugas.filter(t => t.id !== id);
+        render();
+    }
+});
