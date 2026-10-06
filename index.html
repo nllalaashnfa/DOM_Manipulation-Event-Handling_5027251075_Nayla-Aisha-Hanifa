@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Task Tracker Kuliah_Nayla Aisha Hanifa_5027251075</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="app.js" defer></script>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h2>📝 Tacker Tugas Kuliah 📝</h2>
+        </header>
+        
+        <form id="form-tugas">
+            <input type="text" id="input-judul" placeholder="Judul tugas" autocomplete="off">
+            <div class="baris-input">
+                <select id="input-matkul">
+                    <option value="Pemrograman Web">Pemrograman Web</option>
+                    <option value="Basis Data">Basis Data</option>
+                    <option value="Struktur Data">Struktur Data</option>
+                </select>
+                <input type="date" id="input-deadline">
+                <button type="submit">Tambah</button>
+            </div>
+        </form>
+
+        <div class="kontrol">
+            <div class="filter-grup">
+                <button class="btn-filter" data-filter="semua">Semua</button>
+                <button class="btn-filter" data-filter="aktif">Aktif</button>
+                <button class="btn-filter" data-filter="selesai">Selesai</button>
+            </div>
+            <span id="counter">0 tugas aktif</span>
+        </div>
+
+        <ul id="list-tugas"></ul>
+    </div>
+</body>
+</html>

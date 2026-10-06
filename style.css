@@ -1,0 +1,19 @@
+* { box-sizing: border-box; font-family: sans-serif; }
+body { background-color: #370837; padding: 20px; display: flex; justify-content: center;}
+.container { background: rgb(146, 27, 118); padding: 20px; border-radius: 8px; width: 100%; max-width: 500px; box-shadow: 0 4px 6px rgba(253, 248, 248, 0.288); }
+
+input, select, button { padding: 10px; border: 1px solid #ccc; border-radius: 4px; font-size: 14px; }
+#input-judul { width: 100%; margin-bottom: 10px; }
+.baris-input { display: flex; gap: 10px; }
+.baris-input select { flex: 1; }
+.baris-input button { background-color: #6a0f41; color: rgb(244, 243, 243); border: none; cursor: pointer; }
+
+.kontrol { display: flex; justify-content: space-between; align-items: center; margin: 20px 0; font-size: 14px; }
+.btn-filter { background: transparent; border: 1px solid #ccc; cursor: pointer; border-radius: 20px; padding: 5px 12px; }
+
+ul { list-style: none; padding: 0; margin: 0; }
+li { display: flex; align-items: center; padding: 12px; border: 1px solid #eee; border-radius: 6px; margin-bottom: 8px; gap: 12px; }
+li .teks { flex: 1; }
+li .teks strong { display: block; margin-bottom: 4px; color: #f4efef; }
+li .teks small { color: #666; font-size: 12px; }
+.btn-hapus { background: transparent; border: 1px solid #fca5a5; color: #ef4444; border-radius: 4px; cursor: pointer; }
