@@ -1,4 +1,13 @@
-let tugas = [];
+let tugas = JSON.parse(localStorage.getItem('tugas-kuliah')) || [];
+let filterAktif = 'semua';
+
+const counter = document.getElementById('counter');
+const pesanKosong = document.getElementById('pesan-kosong');
+const tombolFilters = document.querySelectorAll('.btn-filter');
+
+function simpanData() {
+    localStorage.setItem('tugas-kuliah', JSON.stringify(tugas));
+}
 
 const listTugas = document.getElementById('list-tugas');
 const form = document.getElementById('form-tugas');
@@ -35,7 +44,52 @@ const li = document.createElement('li');
     });
 }
 
-render(); 
+function render() {
+    let dataDitampilkan = tugas.filter(item => {
+        if (filterAktif === 'aktif') return !item.selesai;
+        if (filterAktif === 'selesai') return item.selesai;
+        return true;
+    });
+    dataDitampilkan.sort((a, b) => new Date(a.deadline) - new Date(b.deadline));
+
+    listTugas.innerHTML = '';
+
+    dataDitampilkan.forEach(item => {
+        const li = document.createElement('li');
+        if (item.selesai) li.classList.add('selesai');
+        li.dataset.id = item.id;
+
+        const checkbox = document.createElement('input');
+        checkbox.type = 'checkbox';
+        checkbox.className = 'cek-selesai';
+        checkbox.checked = item.selesai;
+
+        const divTeks = document.createElement('div');
+        divTeks.className = 'teks';
+        const judul = document.createElement('strong');
+        judul.textContent = item.judul;
+        const meta = document.createElement('small');
+        meta.textContent = `${item.matkul} - deadline ${item.deadline}`;
+
+        divTeks.appendChild(judul);
+        divTeks.appendChild(meta);
+
+        const btnHapus = document.createElement('button');
+        btnHapus.className = 'btn-hapus';
+        btnHapus.textContent = '✕';
+
+        li.appendChild(checkbox);
+        li.appendChild(divTeks);
+        li.appendChild(btnHapus);
+        listTugas.appendChild(li);
+    });
+
+    const jumlahAktif = tugas.filter(t => !t.selesai).length;
+    counter.textContent = `${jumlahAktif} tugas aktif`;
+    
+    if (dataDitampilkan.length === 0) pesanKosong.classList.remove('sembunyi');
+    else pesanKosong.classList.add('sembunyi');
+}
 
 form.addEventListener('submit', (e) => {
     e.preventDefault();
@@ -82,4 +136,13 @@ listTugas.addEventListener('click', (e) => {
         tugas = tugas.filter(t => t.id !== id);
         render();
     }
+});
+
+tombolFilters.forEach(btn => {
+    btn.addEventListener('click', (e) => {
+        tombolFilters.forEach(b => b.classList.remove('on'));
+        e.target.classList.add('on');
+        filterAktif = e.target.dataset.filter;
+        render();
+    });
 });
