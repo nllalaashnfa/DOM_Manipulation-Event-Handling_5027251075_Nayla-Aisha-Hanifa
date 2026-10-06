@@ -17,3 +17,6 @@ li .teks { flex: 1; }
 li .teks strong { display: block; margin-bottom: 4px; color: #f4efef; }
 li .teks small { color: #666; font-size: 12px; }
 .btn-hapus { background: transparent; border: 1px solid #fca5a5; color: #ef4444; border-radius: 4px; cursor: pointer; }
+
+.error { color: red; font-size: 12px; margin-bottom: 10px; }
+.sembunyi { display: none; }
